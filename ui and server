@@ -1,0 +1,26 @@
+
+UI.R
+
+library(shiny)
+fluidPage(
+  titlePanel("Sapio data by Location"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("location", "select a state", choices = vdata$current_location)
+        ),
+    mainPanel(
+      tableOutput("vdata")
+    )
+  )
+)
+
+Server.R
+
+shinyServer(function(input, output){
+  output$vdata <- renderTable({
+    locationfilter <- subset(vdata, vdata$current_location == input$location)
+    
+    
+  })
+  
+  })
